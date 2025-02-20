@@ -47,9 +47,9 @@ sudo chmod +x /usr/local/bin/docker-compose
 ### 5️⃣ Clonage du projet Wazuh Docker
 ```bash
 git clone https://github.com/DeudjuiMarcel/PER.git
-cd wazuh-docker/single-node/
+cd PER/wazuh-docker/single-node/
 ```
-> 📌 Clone le dépôt officiel **Wazuh Docker** et se place dans le répertoire **single-node**.
+> 📌 Clone le dépôt de ce projet **PER** et se place dans le répertoire **single-node**.
 
 ### 6️⃣ Génération des certificats pour Wazuh
 ```bash
@@ -72,7 +72,7 @@ Après quelques minutes, vous pouvez vérifier si les conteneurs tournent correc
 ```bash
 docker ps
 ```
-Vous devriez voir plusieurs conteneurs **wazuh**, **indexer**, et **kibana** en cours d'exécution.
+Vous devriez voir plusieurs conteneurs **wazuh_manager**, **wazuh_indexer**, et **wazuh_dashboard** et les autres services vulnérables ainsi qu'une machine kali permétant de simuler des scénarios d'attaque en cours d'exécution.
 
 ---
 
@@ -80,7 +80,7 @@ Vous devriez voir plusieurs conteneurs **wazuh**, **indexer**, et **kibana** en 
 
 1. Ouvrez votre navigateur et accédez à **Kibana** via :
    ```
-   http://<IP_DE_VOTRE_SERVEUR>:5601
+   https://@IP_docker
    ```
 2. Connectez-vous avec :
    - **Utilisateur** : `admin`
@@ -108,5 +108,4 @@ Vous devriez voir plusieurs conteneurs **wazuh**, **indexer**, et **kibana** en 
 ## 🔍 Dépannage
 
 Si vous rencontrez des problèmes :
-1. Vér
->>>>>>> 9852929 (Initial commit)
+
