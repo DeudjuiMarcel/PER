@@ -1,0 +1,98 @@
+<!-- Local rules -->
+
+<!-- Modify it at your will. -->
+<!-- Copyright (C) 2015, Wazuh Inc. -->
+
+<!-- Example -->
+<group name="local,syslog,sshd,">
+
+  <!--
+  Dec 10 01:02:02 host sshd[1234]: Failed none for root from 1.1.1.1 port 10>
+  -->
+  <rule id="100001" level="5">
+    <if_sid>5716</if_sid>
+    <srcip>1.1.1.1</srcip>
+    <description>sshd: authentication failed from IP 1.1.1.1.</description>
+    <group>authentication_failed,pci_dss_10.2.4,pci_dss_10.2.5,</group>
+  </rule>
+</group>
+
+
+<group name="local,syslog,test">
+  <rule id="100002" level="12" noalert="0">
+    <match>TEST_WAZUH_ALER</match> 
+    <description>La lecture du fichier de log est éffective!</description>
+    <group>test_group</group>
+  </rule>
+</group>
+
+<!-- Apache-->
+<group name="local,testcgi">
+  <rule id="100003" level="12">
+    <if_level>5</if_level>
+    <match>/cgi-bin|/bin/bash|/bin/sh</match>
+    <description>Requete possédant "/cgi-bin" ou /bin/bash or sh. Analysez le possible payload et verifiez si il y'a un accès non autorisé.</description>
+    <group>apache_cgi</group>
+  </rule>
+</group>
+
+<!-- Connexion reseau (general)-->
+<group name="network_monitor,">
+  <rule id="100004" level="0">
+    <if_sid>530</if_sid>
+    <match>^ossec: output: 'netstat -an</match>
+    <description>Pas de connexion suspecte. Tout semble être OK!</description>
+  </rule>
+
+  <rule id="100005" level="13" ignore="30">
+    <if_sid>100004</if_sid>
+    <match>/bash|/sh</match>
+    <description>Connexion réseau suspecte.Potentiel reverse shell actif. Tuez le processus correspondant si vous n'en êtes pas le créateur</description>
+  </rule>
+  
+<!-- Connexion reseau tomcat-->
+  <rule id="100008" level="13" ignore="30">
+    <if_sid>100004</if_sid>
+    <match>/java</match>
+    <description>Connexion réseau suspecte initiée par java. Potentiel reverse shell actif. Tuez le processus correspondant si vous n'en êtes pas le créateur</description>
+  </rule>
+  
+<!-- Connexion reseau ssh-->
+  <rule id="100011" level="13" ignore="360">
+    <if_sid>100004</if_sid>
+    <match>:22</match>
+    <description>Connexion ssh sur la machine.</description>
+  </rule>
+  
+</group>
+
+<!-- Samba-->
+<group name="local,testsamba">
+  <rule id="100006" level="12" ignore="60">
+    <match>guest authentication|nobody opened</match>
+    <description>Une connexion guest a été initiée. L'utilisateur correspondant est "nobody". Il pourrait s'agir d'une RCE</description>
+    <group>guest_samba_connexion</group>
+  </rule>
+</group>
+
+<!-- Tomcat-->
+<group name="local,test-tomcat">
+  <rule id="100009" level="12" ignore="60">
+    <if_sid>31108</if_sid>
+    <protocol>PUT</protocol>
+    <match>jsp</match>
+    <description>Une requête PUT a été recu. vérifiez la légitimité de cette dernière car ca pourrait être pour une RCE</description>
+    <group>tomcat_PUT_requete</group>
+  </rule>
+</group>
+
+<!-- Ssh-->
+<group name="local,ssh">
+  <rule id="100010" level="12" ignore="60">
+    <match>error: maximum authentication attempts exceeded for</match>
+    <description>Multiples connexions ssh échoué, possible attaque Brute force. Consultez les logs /var/log/messages et bloquez ssh pour cet ip</description>
+    <group>multiples_ssh_connexion</group>
+  </rule>
+</group>
+
+
