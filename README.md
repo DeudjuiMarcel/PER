@@ -1,10 +1,11 @@
-<<<<<<< HEAD
+
 # PER
 Code source du PER
 =======
 # 🚀 Installation de Wazuh en Single-Node avec Docker
 
 Ce projet permet d'installer et de déployer **Wazuh** et une infrastructure qui contient des mservices vulnérables sur un serveur en mode **Single-Node** à l'aide de **Docker et Docker Compose**.
+Les différents répertoires à l'exception de wazuh-docker contiennent les Dockerfiles que nous avons utilisés pour créer les images dockers des services vulnérables. 
 
 ## 📌 Prérequis
 
@@ -45,7 +46,7 @@ sudo chmod +x /usr/local/bin/docker-compose
 
 ### 5️⃣ Clonage du projet Wazuh Docker
 ```bash
-git clone https://github.com/wazuh/wazuh-docker.git -b v4.10.1
+git clone https://github.com/DeudjuiMarcel/PER.git
 cd wazuh-docker/single-node/
 ```
 > 📌 Clone le dépôt officiel **Wazuh Docker** et se place dans le répertoire **single-node**.
@@ -60,7 +61,8 @@ docker-compose -f generate-indexer-certs.yml run --rm generator
 ```bash
 docker-compose up -d
 ```
-> 📌 Démarre tous les services **Wazuh**, **Elasticsearch**, et **Kibana** en mode **détaché** (`-d`), ce qui signifie qu'ils s'exécuteront en arrière-plan.
+> 📌 Démarre tous les services **Wazuh**, **Elasticsearch**, et **Kibana** et également les services vulnérables en mode **détaché** (`-d`), ce qui signifie qu'ils s'exécuteront en arrière-plan.
+
 
 ---
 
