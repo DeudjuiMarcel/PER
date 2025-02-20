@@ -2,10 +2,10 @@
 # PER
 Code source du PER
 =======
-# 🚀 Installation de Wazuh en Single-Node avec Docker
+# 🚀 Installation de Wazuh en Single-Node avec Docker et des services vulnérables.
 
 Ce projet permet d'installer et de déployer **Wazuh** et une infrastructure qui contient des mservices vulnérables sur un serveur en mode **Single-Node** à l'aide de **Docker et Docker Compose**.
-Les différents répertoires à l'exception de wazuh-docker contiennent les Dockerfiles que nous avons utilisés pour créer les images dockers des services vulnérables. 
+Les différents répertoires à l'exception de wazuh-docker contiennent les Dockerfiles que nous avons utilisés pour créer les images dockers des services vulnérables. Ainsi on pourra surveiller les machines vulnérables dans un duel entre un blueteamer et un redteamer et éventuellement prendre des mesures de sécurité adéquates. Cela donnera aux participants l'opportunité de monter en compétences techniques en matière de sécurité offensive et défensive. 
 
 ## 📌 Prérequis
 
