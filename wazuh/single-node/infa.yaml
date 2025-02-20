@@ -1,0 +1,71 @@
+version: '3'
+services:
+  Kali:
+    image: 'sadry/sadry:tp_pen_kali'
+    container_name: kali
+    stdin_open: true
+    tty: true
+    ports:
+      - '9020:8080'
+      - '9021:5900'
+    networks:
+      - single-node_pentestnetwork
+
+  Apache:
+    image: 'apache-vuln:latest'
+    container_name: apache-vuln
+    stdin_open: true
+    tty: true
+    hostname: apache
+    privileged: true
+    networks:
+      - single-node_pentestnetwork
+    command: /usr/sbin/init
+
+  Samba:
+    image: 'samba-vuln:latest'
+    container_name: samba-vuln
+    stdin_open: true
+    tty: true
+    hostname: samba
+    privileged: true
+    networks:
+      - single-node_pentestnetwork
+    command: /usr/sbin/init
+
+  Tomcat:
+    image: 'tomcat-vuln:latest'
+    container_name: tomcat-vuln
+    stdin_open: true
+    tty: true
+    hostname: tomcat
+    privileged: true
+    networks:
+      - single-node_pentestnetwork
+    command: /usr/sbin/init
+
+  Jenkins:
+    image: 'jenkins-vuln:latest'
+    container_name: jenkins-vuln
+    stdin_open: true
+    tty: true
+    hostname: jenkins
+    privileged: true
+    networks:
+      - single-node_pentestnetwork
+    command: /usr/sbin/init
+
+  Ssh:
+    image: 'ssh-vuln:latest'
+    container_name: ssh-vuln
+    stdin_open: true
+    tty: true
+    hostname: ssh
+    privileged: true
+    networks:
+      - single-node_pentestnetwork
+    command: /usr/sbin/init
+
+networks:
+  single-node_pentestnetwork:
+    external: true

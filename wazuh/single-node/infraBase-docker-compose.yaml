@@ -1,0 +1,23 @@
+version: '3'
+services:
+  Kali:
+    image: 'sadry/sadry:tp_pen_kali'
+    container_name: kali
+    stdin_open: true
+    tty: true
+    ports:
+      - '9020:8080'
+      - '9021:5900'
+    networks:
+      - single-node_pentestnetwork
+  Samba:
+    image: 'hichigari/samba:latest'
+    container_name: samba
+    stdin_open: true
+    tty: true
+    networks:
+      - single-node_pentestnetwork
+
+networks: 
+  single-node_pentestnetwork:
+    external: true
