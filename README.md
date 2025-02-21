@@ -47,7 +47,7 @@ sudo chmod +x /usr/local/bin/docker-compose
 ### 5️⃣ Clonage du projet Wazuh Docker
 ```bash
 git clone https://github.com/DeudjuiMarcel/PER.git
-cd PER/wazuh-docker/single-node/
+cd PER/wazuh/single-node/
 ```
 > 📌 Clone le dépôt de ce projet **PER** et se place dans le répertoire **single-node**.
 
