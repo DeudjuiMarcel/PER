@@ -46,7 +46,7 @@ services:
     networks:
       it_network:
         ipv4_address: 192.168.100.10
-      pentestnetwork_2:
+      customer_network:
         ipv4_address: 192.168.200.10
 
   wazuh.indexer:
@@ -76,7 +76,7 @@ services:
     networks:
       it_network:
         ipv4_address: 192.168.100.11
-      pentestnetwork_2:
+      customer_network:
         ipv4_address: 192.168.200.11
 
   wazuh.dashboard:
@@ -109,7 +109,7 @@ services:
     networks:
       it_network:
         ipv4_address: 192.168.100.12
-      pentestnetwork_2:
+      customer_network:
         ipv4_address: 192.168.200.12
   
 
