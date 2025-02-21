@@ -46,7 +46,7 @@ services:
     networks:
       it_network:
         ipv4_address: 192.168.100.10
-      pentestnetwork_2:
+      customer_network:
         ipv4_address: 192.168.200.10
 
   wazuh.indexer:
@@ -76,7 +76,7 @@ services:
     networks:
       it_network:
         ipv4_address: 192.168.100.11
-      pentestnetwork_2:
+      customer_network:
         ipv4_address: 192.168.200.11
 
   wazuh.dashboard:
@@ -109,7 +109,7 @@ services:
     networks:
       it_network:
         ipv4_address: 192.168.100.12
-      pentestnetwork_2:
+      customer_network:
         ipv4_address: 192.168.200.12
   
 
@@ -133,6 +133,7 @@ services:
     privileged: true
     networks:
       - customer_network
+      - it_network
     command: /usr/sbin/init
 
   Samba:
@@ -157,16 +158,16 @@ services:
       - it_network
     command: /usr/sbin/init
 
-  Dvwa:
-    image: 'marceldeudjui/dvwa-vuln:latest'
-    container_name: dvwa-vuln
-    stdin_open: true
-    tty: true
-    hostname: dvwa
-    privileged: true
-    networks:
-      - it_network
-    command: /usr/sbin/init
+#  Dvwa:
+#    image: 'marceldeudjui/dvwa-vuln:latest'
+#    container_name: dvwa-vuln
+#    stdin_open: true
+#    tty: true
+#    hostname: dvwa
+#    privileged: true
+#    networks:
+#     - it_network
+#    command: /usr/sbin/init
 
   Ssh:
     image: 'marceldeudjui/ssh-vuln:latest'
@@ -177,6 +178,17 @@ services:
     privileged: true
     networks:
       - it_network
+    command: /usr/sbin/init
+
+  Jenkins:
+    image: 'weishen63/jenkins_vul:2.0'
+    container_name: jenkins-vuln
+    stdin_open: true
+    tty: true
+    hostname: jenkins
+    privileged: true
+    networks:
+      - customer_network
     command: /usr/sbin/init
 
 
