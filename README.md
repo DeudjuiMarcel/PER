@@ -88,7 +88,7 @@ Vous devriez voir plusieurs conteneurs **wazuh_manager**, **wazuh_indexer**, et 
 
 ---
 
-## 🛠️ Gestion des conteneurs
+## 🛠️ Gestion des conteneurs et images 
 
 - **Arrêter les services** :
   ```bash
@@ -98,10 +98,17 @@ Vous devriez voir plusieurs conteneurs **wazuh_manager**, **wazuh_indexer**, et 
   ```bash
   docker-compose up -d
   ```
-- **Afficher les logs** :
+- **creer une image avec Dockerfile** :
   ```bash
-  docker-compose logs -f
+  cd nom-service
+  docker build -t nom-image .
   ```
+
+---
+
+## 🛠️ Configuration des regles wazuh
+
+Suivre depuis le dashboad wazuh  Server management -> rules -> manages rules files -> page 17 >> modifier localrule.xml et y coller celui du projet actuel
 
 ---
 
