@@ -42,9 +42,9 @@ RUN mkdir -p /run/sshd && \
     sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config && \
     echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
 
-# Ajouter un utilisateur vulnérable
+# Ajouter un utilisateur vulnérable mettre un mot de  passe pluc complexe complique la tache à l'attaquant
 RUN useradd -m -s /bin/bash nayneshkumar && \
-    echo "nayneshkumar:barcelona" | chpasswd
+    echo "nayneshkumar:barcelona" | chpasswd 
 
 RUN echo 'nayneshkumar ALL=(ALL) NOPASSWD: /bin/bash' >> /etc/sudoers
 

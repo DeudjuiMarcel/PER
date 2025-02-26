@@ -35,6 +35,4 @@ RUN chmod +x /start.sh
 # Exposer le port HTTP pour DVWA
 EXPOSE 80
 
-# Démarrer les services Apache et MariaDB au démarrage du conteneur
-#CMD ["/start.sh"]
 RUN echo "@reboot root /start.sh" >> /etc/crontab

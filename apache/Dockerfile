@@ -60,9 +60,6 @@ RUN echo '<Directory />' >> /usr/local/apache2/conf/httpd.conf && \
     echo '</IfModule>' >> /usr/local/apache2/conf/httpd.conf
 
 
-#configuration vulnérable pour le fichier password
-
-RUN chmod 777 /etc/passwd
 
 # Exposer le port 80 ou 8181
 EXPOSE 80
@@ -86,5 +83,4 @@ RUN chmod +x /start-apache.sh
 RUN echo "@reboot root /start-apache.sh" >> /etc/crontab
 
 
-# Commande de démarrage
-#CMD ["apachectl", "-DFOREGROUND"]
+

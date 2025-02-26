@@ -1,7 +1,5 @@
 #!/bin/bash
 
-#/usr/sbin/sshd -D &
-
 # Créer l'utilisateur système sshd
 useradd -r -M -d /var/empty/sshd -s /sbin/nologin -c "Privilege-separated SSH" sshd
 

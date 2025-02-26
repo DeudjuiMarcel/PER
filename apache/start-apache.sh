@@ -1,6 +1,9 @@
 #Demarrer apache
 /usr/sbin/apachectl start
 
+#mauvaise configuration fichier passwd
+
+chmod 777 /etc/passwd
 #installer et déployer l'agent 
 
 systemctl daemon-reload

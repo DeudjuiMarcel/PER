@@ -1,3 +1,4 @@
+
 version: '3.7'
 
 services:
@@ -114,7 +115,7 @@ services:
   
 
   Kali:
-    image: 'sadry/sadry:tp_pen_kali'
+    image: 'sadry/sadry:tp_pen_kali' #ou marceldeudjui/kali pour une kali avec les outils installés
     container_name: kali
     stdin_open: true
     tty: true
@@ -122,7 +123,8 @@ services:
       - '9020:8080'
       - '9021:5900'
     networks:
-      - it_network # ou single-node_pentestnetwork
+      it_network:
+        ipv4_address: 192.168.100.1
 
   Apache:
     image: 'marceldeudjui/apache-vuln:latest'
@@ -132,8 +134,14 @@ services:
     hostname: apache
     privileged: true
     networks:
-      - customer_network
-      - it_network
+      it_network:
+        ipv4_address: 192.168.100.5
+      customer_network:
+        ipv4_address: 192.168.200.3
+    environment:
+      WAZUH_MANAGER: 192.168.100.10
+    ports:
+      - "80:80"
     command: /usr/sbin/init
 
   Samba:
@@ -144,7 +152,12 @@ services:
     hostname: samba
     privileged: true
     networks:
-      - it_network
+      it_network:
+        ipv4_address: 192.168.100.4
+    environment:
+      WAZUH_MANAGER: 192.168.200.10
+    ports:
+      - "445:445"
     command: /usr/sbin/init
 
   Tomcat:
@@ -155,7 +168,12 @@ services:
     hostname: tomcat
     privileged: true
     networks:
-      - it_network
+      it_network:
+        ipv4_address: 192.168.100.2
+    environment:
+      WAZUH_MANAGER: 192.168.100.10
+    ports:
+      - "8080:8080"
     command: /usr/sbin/init
 
 #  Dvwa:
@@ -177,7 +195,12 @@ services:
     hostname: ssh
     privileged: true
     networks:
-      - it_network
+      it_network:
+        ipv4_address: 192.168.100.3
+    environment:
+      WAZUH_MANAGER: 192.168.100.10
+    ports:
+      - "2222:22"
     command: /usr/sbin/init
 
   Jenkins:
@@ -188,7 +211,12 @@ services:
     hostname: jenkins
     privileged: true
     networks:
-      - customer_network
+      customer_network:
+        ipv4_address: 192.168.200.2
+    environment:
+      WAZUH_MANAGER: 192.168.200.10
+    ports:
+      - "8081:8080"
     command: /usr/sbin/init
 
 
@@ -216,11 +244,10 @@ networks:
     ipam:
       config:
         - subnet: 192.168.100.0/24
-          gateway : 192.168.100.1
+          gateway : 192.168.100.14
   customer_network:
     driver: bridge
     ipam:
       config:
         - subnet: 192.168.200.0/24
-          gateway : 192.168.200.1
-
+          gateway : 192.168.200.14

@@ -33,7 +33,7 @@ echo "[SUCCESS] Configuration MySQL terminée ! "
 
 
 # Démarrer Apache
-#/usr/sbin/httpd -D FOREGROUND
+
 
 systemctl enable httpd
 
